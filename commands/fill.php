@@ -1,5 +1,7 @@
 <?php
 
+use Faker\Factory;
+
 require dirname(__DIR__) . '/vendor/autoload.php';
 
 $faker = Faker\Factory::create('fr_FR'); // Gérer des données aléatoires
