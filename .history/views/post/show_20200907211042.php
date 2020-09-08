@@ -8,7 +8,7 @@ $slug = $params['slug'];
 
 $pdo = Connexion::getPDO();
 $query = $pdo->prepare('SELECT * FROM post WHERE id = :id');
-$query->execute(['id' => $id]);
+$query->execute(['id' =>$id]);
 $query->setFetchMode(PDO::FETCH_CLASS, Post::class);
 
 /** @var Post|false */

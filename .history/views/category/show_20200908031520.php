@@ -1,5 +1,8 @@
 <?php
 
+use \PDO;
+use App\URL;
+use \Exception;
 use App\Connexion;
 use App\PaginatedQuery;
 use App\Model\{Post, Category};
@@ -37,7 +40,7 @@ $paginatedQuery = new PaginatedQuery(
     ORDER BY created_at DESC",
     "SELECT COUNT(category_id)
     FROM post_category
-    WHERE category_id = {$category->getID()}"
+    WHERE category_id = ' {$category->getID()}"
 );
 
 /**

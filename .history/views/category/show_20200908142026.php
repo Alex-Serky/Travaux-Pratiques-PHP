@@ -1,5 +1,7 @@
 <?php
 
+use PDO;
+use Exception;
 use App\Connexion;
 use App\PaginatedQuery;
 use App\Model\{Post, Category};

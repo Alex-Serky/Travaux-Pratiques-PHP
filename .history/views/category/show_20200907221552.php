@@ -1,5 +1,8 @@
 <?php
 
+use PDO;
+use App\URL;
+use Exception;
 use App\Connexion;
 use App\PaginatedQuery;
 use App\Model\{Post, Category};
@@ -37,14 +40,16 @@ $paginatedQuery = new PaginatedQuery(
     ORDER BY created_at DESC",
     "SELECT COUNT(category_id)
     FROM post_category
-    WHERE category_id = {$category->getID()}"
+    WHERE category_id = ' {$category->getID()}",
+    Post::class
 );
 
 /**
  * @var Post[]
  * On va récupérer un tableau d'article
  */
-$posts = $paginatedQuery->getItems(Post::class);
+$posts = $paginatedQuery->getItems();
+dd($posts);
 $link = $router->url('category', ['id' => $category->getID(), 'slug' => $category->getSlug()]);
 ?>
 
@@ -59,6 +64,14 @@ $link = $router->url('category', ['id' => $category->getID(), 'slug' => $categor
 </div>
 
 <div class="d-flex justify-content-between my-4">
-    <?= $paginatedQuery->previousLink($link) ?>
-    <?= $paginatedQuery->nextLink($link) ?>
+    <?php if ($currentPage > 1): ?>
+        <?php
+        $l = $link;
+        if ($currentPage > 2) $l = $link . '?page=' . ($currentPage - 1);
+        ?>
+        <a href="<?= $l ?>" class="btn btn-primary">&laquo; Page précédente</a>
+    <?php endif ?>
+    <?php if ($currentPage < $pages): ?>
+        <a href="<?= $link ?>?page=<?= $currentPage + 1 ?>" class="btn btn-primary ml-auto">Page suivante &raquo;</a>
+    <?php endif ?>
 </div>

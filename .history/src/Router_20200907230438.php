@@ -44,7 +44,6 @@ class Router
         require $this->viewPath . DIRECTORY_SEPARATOR . $view . '.php';
         $content = ob_get_clean();
         require $this->viewPath . DIRECTORY_SEPARATOR . 'layouts/default.php';
-
         return $this;
     }
 }

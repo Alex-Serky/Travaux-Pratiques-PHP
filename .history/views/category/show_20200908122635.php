@@ -1,5 +1,7 @@
 <?php
 
+use \PDO;
+use \Exception;
 use App\Connexion;
 use App\PaginatedQuery;
 use App\Model\{Post, Category};
@@ -37,7 +39,7 @@ $paginatedQuery = new PaginatedQuery(
     ORDER BY created_at DESC",
     "SELECT COUNT(category_id)
     FROM post_category
-    WHERE category_id = {$category->getID()}"
+    WHERE category_id = ' {$category->getID()}"
 );
 
 /**
@@ -45,6 +47,7 @@ $paginatedQuery = new PaginatedQuery(
  * On va récupérer un tableau d'article
  */
 $posts = $paginatedQuery->getItems(Post::class);
+dd($posts);
 $link = $router->url('category', ['id' => $category->getID(), 'slug' => $category->getSlug()]);
 ?>
 

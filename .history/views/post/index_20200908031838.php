@@ -21,13 +21,13 @@ $link = $router->url('home');
 
 <div class="row">
     <?php foreach ($posts as $post) : ?>
-        <div class="col-md-3">
+        <div class="col-md-3 my-2">
             <?php require 'card.php' ?>
         </div>
     <?php endforeach ?>
 </div>
 
 <div class="d-flex justify-content-between my-4">
-    <?= $paginatedQuery->previousLink($link); ?>
-    <?= $paginatedQuery->nextLink($link); ?>
+    <?= $paginatedQuery->previousLink($link) ?>
+    <?= $paginatedQuery->nextLink($link) ?>
 </div>
