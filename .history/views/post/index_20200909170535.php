@@ -33,6 +33,7 @@ $categories = $pdo
 foreach ($categories as $category) {
     $postsByID[$category->getPostID()]->addCategory($category);
 }
+dump($posts);
 
 $link = $router->url('home');
 ?>

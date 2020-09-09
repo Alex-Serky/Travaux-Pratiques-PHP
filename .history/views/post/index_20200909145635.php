@@ -2,7 +2,7 @@
 
 use App\URL;
 use App\Connexion;
-use App\Model\{Post, Category};
+use App\Model\Post;
 use App\Helpers\Text;
 use App\PaginatedQuery;
 
@@ -14,26 +14,17 @@ $paginatedQuery = new PaginatedQuery(
     "SELECT COUNT(id) FROM post", // Paramètres permettant d compter les résultats.
 );
 $posts = $paginatedQuery->getItems(Post::class);
-$postsByID = [];
+$ids = [];
 foreach ($posts as $post) {
-    $postsByID[$post->getID()] = $post;
+    $ids = $post->getID();
 }
-
 $categories = $pdo
     ->query('SELECT c.*, pc.post_id
             FROM post_category pc
             JOIN category c ON c.id = pc.category_id
-            WHERE pc.post_id IN (' . implode(',', array_keys($postsByID)) . ')') // La fonction implode() est de prendre un tabeau et d'en faire une chaîne de caractères
+            WHERE pc.post_id IN (' . implode(',', $ids) . ')')
     ->fetchAll(PDO::FETCH_CLASS, Category::class);
-
-/** Parcourir les catégories
-* Trouver l'article $posts correspondant à la ligne
-* Ajouter la catégorie à la ligne
-*/
-foreach ($categories as $category) {
-    $postsByID[$category->getPostID()]->addCategory($category);
-}
-
+dd($categories);
 $link = $router->url('home');
 ?>
 

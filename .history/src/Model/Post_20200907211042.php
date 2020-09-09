@@ -12,7 +12,7 @@ class Post
     private $slug;
     private $content;
     private $created_at;
-    private $categories = [];
+    private $categories;
 
     public function getName(): ?string
     {
@@ -45,20 +45,5 @@ class Post
     public function getID (): ?int
     {
         return $this->id;
-    }
-
-    /**
-     *
-     * @return Category[]
-     */
-    public function getCategories(): array
-    {
-        return $this->categories;
-    }
-
-    public function addCategory (Category $category): void
-    {
-        $this->categories[] = $category;
-        $category->setPost($this);
     }
 }

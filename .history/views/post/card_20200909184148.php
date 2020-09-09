@@ -1,9 +1,6 @@
 <?php
 
 // Créer un tableau contenant la syntaxe HTML d'un lien
-
-/** Première méthode */
-
 // $categories = [];
 // foreach ($post->getCategories() as $category) {
 //     $url = $router->url('category', ['id' => $category->getID(), 'slug' => $category->getSlug()]);
@@ -12,12 +9,7 @@
 // HTML;
 // }
 
-/**
- * Deuxième méthode
- *
- * Array_map permet d'appliquer une fonction sur les éléments d'un tableau
- */
-
+// Deuxième méthode
 $categories = array_map(function ($category) use ($router) {
     $url = $router->url('category', ['id' => $category->getID(), 'slug' => $category->getSlug()]);
     return <<<HTML

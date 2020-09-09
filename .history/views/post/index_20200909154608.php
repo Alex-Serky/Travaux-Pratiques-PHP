@@ -31,8 +31,9 @@ $categories = $pdo
 * Ajouter la catégorie à la ligne
 */
 foreach ($categories as $category) {
-    $postsByID[$category->getPostID()]->addCategory($category);
+    $postsByID[$category->getPostID()]->categories[] = $category;
 }
+dump($categories);
 
 $link = $router->url('home');
 ?>
