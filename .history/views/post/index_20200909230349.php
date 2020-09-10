@@ -1,7 +1,10 @@
 <?php
 
 use App\Connexion;
+use App\Helpers\Text;
+use App\PaginatedQuery;
 use App\Table\PostTable;
+use App\Model\{Post, Category};
 
 $title = 'Mon Blog';
 $pdo = Connexion::getPDO();
@@ -9,6 +12,10 @@ $pdo = Connexion::getPDO();
 $table = new PostTable($pdo);
 [$posts, $pagination] = $table->findPaginated();
 
+$paginatedQuery = new PaginatedQuery(
+    "SELECT * FROM post ORDER BY created_at DESC", // Paramètres SQL permettant de générer les enregistrements.
+    "SELECT COUNT(id) FROM post", // Paramètres permettant d compter les résultats.
+);
 $link = $router->url('home');
 ?>
 

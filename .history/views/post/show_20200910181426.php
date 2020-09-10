@@ -8,8 +8,10 @@ use App\Table\Table;
 $id = (int)$params['id'];
 $slug = $params['slug'];
 
+$table = new Table($pdo);
+
 $pdo = Connexion::getPDO();
-$post = (new PostTable($pdo))->find($id);
+$query = (new PostTable($pdo))->find($id);
 (new CategoryTable($pdo))->hydratePosts([$post]);
 
 if ($post->getSlug() !== $slug) {
