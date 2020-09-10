@@ -1,0 +1,1 @@
+<h1>Créer un nouvel article <?= $params['id'] ?></h1>

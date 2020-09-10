@@ -1,0 +1,1 @@
+<h1>Supprimer l'article <?= $params['id'] ?></h1>
