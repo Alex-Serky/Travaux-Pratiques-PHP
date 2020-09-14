@@ -2,7 +2,6 @@
 
 use App\Connexion;
 use App\Table\PostTable;
-use App\Validator;
 
 $pdo = Connexion::getPDO();
 $postTable = new PostTable($pdo);
@@ -11,20 +10,18 @@ $success = false;
 $errors = [];
 
 if (!empty($_POST)) {
-    Validator::lang('fr');
-    $v = new Validator($_POST);
-    $v->labels(array(
-        'name' => 'Titre',
-        'content' => 'Contenu'
-    ));
-    $v->rule('required', 'name');
-    $v->rule('lengthBetween', 'name', 3, 200);
+    if (empty($_POST['name']))
+    {
+        $errors['name'] = "Le champ titre ne peut pas être vide";
+    }
+    if (mb_strlen($_POST['name']) <= 3) {
+        $errors['name'][] = "Le titre doit contenir plus de 3 caractères";
+    }
+
     $post->setName($_POST['name']);
-    if ($v->validate()) {
+    if (empty($errors)) {
         $postTable->update($post);
         $success = true;
-    } else {
-        $errors = $v->errors();
     }
 }
 ?>
@@ -46,7 +43,7 @@ if (!empty($_POST)) {
 <form action="" method="POST">
     <div class="form-group">
         <label for="">Titre</label>
-        <input type="text" class="form-control <?= isset($errors['name']) ? 'is-invalid' : ''?>" name="name" value="<?= e($post->getName()) ?>">
+        <input type="text" class="form-control <?= isset($errors['name']) ? 'is-invalid' : ''?>" name="name" value="<?= e($post->getName()) ?>" required>
         <?php if (isset($errors['name'])): ?>
             <div class="invalid-feedback">
                 <?= implode('<br>', $errors['name']) ?>

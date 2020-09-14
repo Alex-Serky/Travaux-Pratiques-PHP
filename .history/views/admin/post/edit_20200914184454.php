@@ -2,7 +2,7 @@
 
 use App\Connexion;
 use App\Table\PostTable;
-use App\Validator;
+use Valitron\Validator;
 
 $pdo = Connexion::getPDO();
 $postTable = new PostTable($pdo);
@@ -18,7 +18,6 @@ if (!empty($_POST)) {
         'content' => 'Contenu'
     ));
     $v->rule('required', 'name');
-    $v->rule('lengthBetween', 'name', 3, 200);
     $post->setName($_POST['name']);
     if ($v->validate()) {
         $postTable->update($post);

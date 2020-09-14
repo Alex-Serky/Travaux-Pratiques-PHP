@@ -2,7 +2,7 @@
 
 use App\Connexion;
 use App\Table\PostTable;
-use App\Validator;
+use Valitron\Validator;
 
 $pdo = Connexion::getPDO();
 $postTable = new PostTable($pdo);
@@ -11,20 +11,15 @@ $success = false;
 $errors = [];
 
 if (!empty($_POST)) {
-    Validator::lang('fr');
     $v = new Validator($_POST);
-    $v->labels(array(
-        'name' => 'Titre',
-        'content' => 'Contenu'
-    ));
-    $v->rule('required', 'name');
-    $v->rule('lengthBetween', 'name', 3, 200);
+    $v->rule('require', 'name');
+
     $post->setName($_POST['name']);
     if ($v->validate()) {
         $postTable->update($post);
         $success = true;
     } else {
-        $errors = $v->errors();
+        dd($v->errors());
     }
 }
 ?>

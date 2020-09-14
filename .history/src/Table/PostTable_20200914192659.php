@@ -19,7 +19,7 @@ final class PostTable extends Table
             'name' => $post->getName()
         ]);
         if ($ok === false) {
-            throw new Exception("Impossible de supprimer l'enregistrement $id dans la table {$this->table}");
+            throw new Exception("Impossible de supprimer l'enregistrement '$id' dans la table {$this->table}");
         }
     }
 

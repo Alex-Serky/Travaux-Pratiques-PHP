@@ -2,7 +2,7 @@
 
 use App\Connexion;
 use App\Table\PostTable;
-use App\Validator;
+use Valitron\Validator;
 
 $pdo = Connexion::getPDO();
 $postTable = new PostTable($pdo);

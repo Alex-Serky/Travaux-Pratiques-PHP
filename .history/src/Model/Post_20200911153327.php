@@ -21,8 +21,7 @@ class Post
 
     public function setName(string $name): self
     {
-        $this->name = $name;
-        return $this;
+        return $this->name = $name;
     }
 
     public function setContent(string $content): self
