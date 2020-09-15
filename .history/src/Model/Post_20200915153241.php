@@ -54,21 +54,9 @@ class Post
         return new DateTime($this->created_at);
     }
 
-    public function setCreatedAt (string $date): self
-    {
-        $this->created_at = $date;
-        return $this;
-    }
-
     public function getSlug (): ?string
     {
         return $this->slug;
-    }
-
-    public function setSlug (string $slug): self
-    {
-        $this->slug = $slug;
-        return $this;
     }
 
     public function getID (): ?int

@@ -22,7 +22,7 @@ final class PostTable extends Table
             'created' => $post->getCreatedAt()->format('Y-m-d H:i:s')
         ]);
         if ($ok === false) {
-            throw new Exception("Impossible de supprimer l'enregistrement {$this->id} dans la table {$this->table}");
+            throw new Exception("Impossible de supprimer l'enregistrement $id dans la table {$this->table}");
         }
     }
 

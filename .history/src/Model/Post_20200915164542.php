@@ -56,7 +56,7 @@ class Post
 
     public function setCreatedAt (string $date): self
     {
-        $this->created_at = $date;
+        $this->date = $date;
         return $this;
     }
 

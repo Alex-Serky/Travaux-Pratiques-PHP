@@ -54,9 +54,9 @@ class Post
         return new DateTime($this->created_at);
     }
 
-    public function setCreatedAt (string $date): self
+    public function setCreatedAt (string $created_at): self
     {
-        $this->created_at = $date;
+        $this->created_at = $created_at;
         return $this;
     }
 
