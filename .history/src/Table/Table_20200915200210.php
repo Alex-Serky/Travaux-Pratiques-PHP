@@ -43,16 +43,10 @@ abstract class Table
      * @param mixed $value : Valeur associée au champ
      * @return boolean
      */
-    public function exists (string $field, $value, ?int $except = null): bool
+    public function exists (string $field, $value): bool
     {
-        $sql = "SELECT COUNT(id) FROM {$this->table} WHERE $field = ?";
-        $params = [$value];
-        if ($except !== null) {
-            $sql .= " AND id != ?";
-            $params[] = $except;
-        }
-        $query= $this->pdo->prepare ($sql);
-        $query->execute($params);
+        $query= $this->pdo->prepare ("SELECT COUNT(id) FROM {$this->table} WHERE $field = ?");
+        $query->execute([$value]);
         return (int)$query->fetch(PDO::FETCH_NUM)[0] > 0;
     }
 }
