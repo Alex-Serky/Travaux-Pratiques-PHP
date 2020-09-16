@@ -17,13 +17,12 @@ $post->setCreatedAt(date('Y-m-d H:i:s'));
 if (!empty($_POST)) {
     $pdo = Connexion::getPDO();
     $postTable = new PostTable($pdo);
-
     Validator::lang('fr');
     $v = new PostValidator($_POST, $postTable, $post->getID());
     ObjectHelper::hydrate($post, $_POST, ['name', 'content', 'slug', 'created_at']);
 
     if ($v->validate()) {
-        $postTable->create($post);
+        $postTable->update($post);
         header('Location: ' . $router->url('admin_post', ['id' => $post->getID()]) . '?created=1');
         exit();
     } else {
@@ -48,4 +47,4 @@ $form = new Form($post, $errors);
 
 <h1>Créer un article</h1>
 
-<?php require('_form.php') ?>
+<?php require('_form.php'); ?>

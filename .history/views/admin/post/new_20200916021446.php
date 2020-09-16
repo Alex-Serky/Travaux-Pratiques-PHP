@@ -8,7 +8,7 @@ use App\ObjectHelper;
 use App\Table\PostTable;
 use App\Validators\PostValidator;
 
-$success = false;
+// $success = false;
 
 $errors = [];
 $post = new Post();

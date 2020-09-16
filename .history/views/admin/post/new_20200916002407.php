@@ -12,20 +12,17 @@ $success = false;
 
 $errors = [];
 $post = new Post();
-$post->setCreatedAt(date('Y-m-d H:i:s'));
 
 if (!empty($_POST)) {
     $pdo = Connexion::getPDO();
     $postTable = new PostTable($pdo);
-
     Validator::lang('fr');
     $v = new PostValidator($_POST, $postTable, $post->getID());
     ObjectHelper::hydrate($post, $_POST, ['name', 'content', 'slug', 'created_at']);
 
     if ($v->validate()) {
-        $postTable->create($post);
-        header('Location: ' . $router->url('admin_post', ['id' => $post->getID()]) . '?created=1');
-        exit();
+        $postTable->update($post);
+        $success = true;
     } else {
         $errors = $v->errors();
     }
@@ -46,6 +43,6 @@ $form = new Form($post, $errors);
     </div>
 <?php endif ?>
 
-<h1>Créer un article</h1>
+<h1>Créer un article <?= e($post->getName()) ?></h1>
 
-<?php require('_form.php') ?>
+<?php require '_form.php'; ?>

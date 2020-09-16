@@ -36,9 +36,8 @@ final class PostTable extends Table
             'created' => $post->getCreatedAt()->format('Y-m-d H:i:s')
         ]);
         if ($ok === false) {
-            throw new Exception("Impossible de créer l'enregistrement dans la table {$this->table}");
+            throw new Exception("Impossible de créer l'enregistrement {$this->id} dans la table {$this->table}");
         }
-        $post->setID($this->pdo->lastInsertId());
     }
 
     public function delete (int $id): void

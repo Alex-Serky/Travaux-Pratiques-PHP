@@ -30,19 +30,13 @@ if (!empty($_POST)) {
 $form = new Form($post, $errors);
 ?>
 
-<?php if ($success) : ?>
+<?php if ($success): ?>
     <div class="alert alert-success">
         L'article a bien été modifié.
     </div>
 <?php endif ?>
 
-<?php if (isset($_GET['created'])) : ?>
-    <div class="alert alert-success">
-        L'article a bien été créé
-    </div>
-<?php endif ?>
-
-<?php if (!empty($errors)) : ?>
+<?php if (!empty($errors)): ?>
     <div class="alert alert-danger">
         L'article n'a pas pu être modifié, merci de corriger vos erreurs.
     </div>
@@ -50,4 +44,10 @@ $form = new Form($post, $errors);
 
 <h1>Editer l'article <?= e($post->getName()) ?></h1>
 
-<?php require('_form.php'); ?>
+<form action="" method="POST">
+    <?= $form->input('name', 'Titre'); ?>
+    <?= $form->input('slug', 'URL'); ?>
+    <?= $form->input('content', 'Contenu'); ?>
+    <?= $form->input('created_at', 'Date de création'); ?>
+    <button class="btn btn-primary">Modifier</button>
+</form>
