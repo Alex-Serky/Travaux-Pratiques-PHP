@@ -6,6 +6,7 @@ use App\Table\PostTable;
 
 Auth::check();
 
+$router->layout = "admin/layouts/default";
 $title = "Administration";
 $pdo = Connexion::getPDO();
 $link = $router->url('admin_posts');
@@ -15,7 +16,7 @@ $link = $router->url('admin_posts');
 
 <?php if (isset($_GET['delete'])): ?>
     <div class="alert alert-success">
-        L'enregistrement a bien été supprimé
+        L'enregistrement a bien été suprimé
     </div>
 <?php endif ?>
 

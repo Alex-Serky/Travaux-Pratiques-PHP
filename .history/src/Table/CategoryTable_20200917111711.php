@@ -36,6 +36,6 @@ final class CategoryTable extends Table
 
     public function all(): array
     {
-        return $this->queryAndFetchAll("SELECT * FROM {$this->table} ORDER BY id DESC");
+        return $this->queryAndFetchAll("SELECT * FROM {$this->table} ORDER BY DESC");
     }
 }

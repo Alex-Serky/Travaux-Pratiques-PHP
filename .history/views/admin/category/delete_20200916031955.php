@@ -1,8 +1,8 @@
 <?php
 
+use App\Auth;
 use App\Connexion;
 use App\Table\PostTable;
-use App\Auth;
 
 Auth::check();
 

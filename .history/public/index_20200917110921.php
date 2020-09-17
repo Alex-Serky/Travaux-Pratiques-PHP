@@ -38,7 +38,7 @@ $router
     ->post('/admin/post/[i:id]/delete', 'admin/post/delete', 'admin_post_delete')
     ->match('/admin/post/new', 'admin/post/new', 'admin_post_new')
     // Gestion des categories
-    ->get('/admin/categories', 'admin/category/index', 'admin_categories')
+    ->get('/admin', 'admin/categories', 'admin_categories')
     ->match('/admin/category/[i:id]', 'admin/category/edit', 'admin_category')
     ->post('/admin/category/[i:id]/delete', 'admin/category/delete', 'admin_category_delete')
     ->match('/admin/category/new', 'admin/category/new', 'admin_category_new')

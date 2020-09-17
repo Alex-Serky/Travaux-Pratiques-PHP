@@ -55,11 +55,11 @@ class Router
         $params = $match['params'];
         $router = $this;
         $isAdmin = strpos($view, 'admin/') !== false;
-        $layout = $isAdmin ? 'admin/layouts/default' : 'layouts/default';
+        $layout = $isAdmin ? 'admin/layouts/default' : 'layout/default';
         ob_start();
         require $this->viewPath . DIRECTORY_SEPARATOR . $view . '.php';
         $content = ob_get_clean();
-        require $this->viewPath . DIRECTORY_SEPARATOR . $layout . '.php';
+        require $this->viewPath . DIRECTORY_SEPARATOR . $this->layout . '.php';
 
         return $this;
     }

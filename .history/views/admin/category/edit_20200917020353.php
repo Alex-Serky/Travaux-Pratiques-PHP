@@ -1,56 +1,56 @@
 <?php
 
+use App\Auth;
 use App\Connexion;
 use App\HTML\Form;
 use App\Validator;
 use App\ObjectHelper;
-use App\Table\PostTable;
-use App\Validators\PostValidator;
-use App\Auth;
+use App\Table\CategoryTable;
+use App\Validators\CategoryValidator;
 
 Auth::check();
 
 $pdo = Connexion::getPDO();
-$postTable = new PostTable($pdo);
-$post = $postTable->find($params['id']);
+$table = new CategoryTable($pdo);
+$item = $table->find($params['id']);
 $success = false;
-
 $errors = [];
+$fields = ['name', 'content', 'slug', 'created_at'];
 
 if (!empty($_POST)) {
     Validator::lang('fr');
-    $v = new PostValidator($_POST, $postTable, $post->getID());
-    ObjectHelper::hydrate($post, $_POST, ['name', 'content', 'slug', 'created_at']);
+    $v = new CategoryValidator($_POST, $table, $item->getID());
+    ObjectHelper::hydrate($item, $_POST, $fields);
 
     if ($v->validate()) {
-        $postTable->updatePost($post);
+        $table->update($item);
         $success = true;
     } else {
         $errors = $v->errors();
     }
 }
 
-$form = new Form($post, $errors);
+$form = new Form($item, $errors);
 ?>
 
 <?php if ($success) : ?>
     <div class="alert alert-success">
-        L'article a bien été modifié.
+        La catégorie a bien été modifiée.
     </div>
 <?php endif ?>
 
 <?php if (isset($_GET['created'])) : ?>
     <div class="alert alert-success">
-        L'article a bien été créé
+        La catégorie a bien été créée
     </div>
 <?php endif ?>
 
 <?php if (!empty($errors)) : ?>
     <div class="alert alert-danger">
-        L'article n'a pas pu être modifié, merci de corriger vos erreurs.
+        La catégorie n'a pas pu être modifié, merci de corriger vos erreurs.
     </div>
 <?php endif ?>
 
-<h1>Editer l'article <?= e($post->getName()) ?></h1>
+<h1>Editer la catégorie <?= e($item->getName()) ?></h1>
 
 <?php require('_form.php'); ?>

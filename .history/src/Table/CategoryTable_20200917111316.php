@@ -36,6 +36,7 @@ final class CategoryTable extends Table
 
     public function all(): array
     {
-        return $this->queryAndFetchAll("SELECT * FROM {$this->table} ORDER BY id DESC");
+        $sql = "SELECT * FROM {$this->table} ORDER BY DESC";
+        return $this->pdo->query($sql, PDO::FETCH_CLASS, $this->class)->fetchAll();
     }
 }

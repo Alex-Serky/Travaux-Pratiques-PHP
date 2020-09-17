@@ -97,9 +97,4 @@ abstract class Table
             throw new Exception("Impossible de modifier l'enregistrement dans la table {$this->table}");
         }
     }
-
-    public function queryAndFetchAll (string $sql): array
-    {
-        return $this->pdo->query($sql, PDO::FETCH_CLASS, $this->class)->fetchAll();
-    }
 }

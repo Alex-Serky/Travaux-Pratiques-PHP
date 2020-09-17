@@ -91,15 +91,10 @@ abstract class Table
         foreach ($data as $key => $value) {
             $sqlFields[] = "$key = :$key";
         }
-        $query = $this->pdo->prepare("UPDATE {$this->table} SET " . implode(', ', $sqlFields) . " WHERE id = :id");
+        $query = $this->pdo->prepare("INSERT INTO {$this->table} SET " . implode(', ', $sqlFields) . " WHERE id = :id");
         $ok = $query->execute(array_merge($data, ['id' => $id]));
         if ($ok === false) {
             throw new Exception("Impossible de modifier l'enregistrement dans la table {$this->table}");
         }
-    }
-
-    public function queryAndFetchAll (string $sql): array
-    {
-        return $this->pdo->query($sql, PDO::FETCH_CLASS, $this->class)->fetchAll();
     }
 }

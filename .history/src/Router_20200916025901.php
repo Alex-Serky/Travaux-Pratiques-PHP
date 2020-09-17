@@ -16,6 +16,8 @@ class Router
      */
     private $router;
 
+    public $layout = 'layouts/default';
+
     public function __construct(string $viewPath)
     {
         $this->viewPath = $viewPath;
@@ -54,12 +56,10 @@ class Router
         $view = $match['target'];
         $params = $match['params'];
         $router = $this;
-        $isAdmin = strpos($view, 'admin/') !== false;
-        $layout = $isAdmin ? 'admin/layouts/default' : 'layouts/default';
         ob_start();
         require $this->viewPath . DIRECTORY_SEPARATOR . $view . '.php';
         $content = ob_get_clean();
-        require $this->viewPath . DIRECTORY_SEPARATOR . $layout . '.php';
+        require $this->viewPath . DIRECTORY_SEPARATOR . $this->layout . '.php';
 
         return $this;
     }

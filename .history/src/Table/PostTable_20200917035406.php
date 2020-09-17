@@ -18,7 +18,7 @@ final class PostTable extends Table
             'name' => $post->getName(),
             'slug' => $post->getSlug(),
             'content' => $post->getContent(),
-            'created_at' => $post->getCreatedAt()->format('Y-m-d H:i:s')
+            'created' => $post->getCreatedAt()->format('Y-m-d H:i:s')
         ], $post->getID());
     }
 

@@ -7,9 +7,6 @@ use App\Model\Post;
 use App\ObjectHelper;
 use App\Table\PostTable;
 use App\Validators\PostValidator;
-use App\Auth;
-
-Auth::check();
 
 $success = false;
 
@@ -26,7 +23,7 @@ if (!empty($_POST)) {
     ObjectHelper::hydrate($post, $_POST, ['name', 'content', 'slug', 'created_at']);
 
     if ($v->validate()) {
-        $postTable->createPost($post);
+        $postTable->create($post);
         header('Location: ' . $router->url('admin_post', ['id' => $post->getID()]) . '?created=1');
         exit();
     } else {
