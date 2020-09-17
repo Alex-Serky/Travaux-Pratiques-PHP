@@ -28,10 +28,7 @@ if (!empty($_POST)) {
     ObjectHelper::hydrate($post, $_POST, ['name', 'content', 'slug', 'created_at']);
 
     if ($v->validate()) {
-        $pdo->beginTransaction();
         $postTable->createPost($post);
-        $postTable->attachCategories($post->getID(), $_POST['categories_ids']);
-        $pdo->commit();
         header('Location: ' . $router->url('admin_post', ['id' => $post->getID()]) . '?created=1');
         exit();
     } else {

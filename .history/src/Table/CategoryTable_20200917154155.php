@@ -19,7 +19,6 @@ final class CategoryTable extends Table
     {
         $postsByID = [];
         foreach ($posts as $post) {
-            $post->setCategories([]);
             $postsByID[$post->getID()] = $post;
         }
 

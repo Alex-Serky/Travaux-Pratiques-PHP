@@ -11,14 +11,21 @@ final class PostTable extends Table
     protected $table = "post";
     protected $class = Post::class;
 
-    public function updatePost (Post $post): void
+    public function updatePost (Post $post, array $categories): void
     {
+        $this->pdo->beginTransaction();
         $this->update([
             'name' => $post->getName(),
             'slug' => $post->getSlug(),
             'content' => $post->getContent(),
             'created_at' => $post->getCreatedAt()->format('Y-m-d H:i:s')
         ], $post->getID());
+        $this->pdo->exec('DELETE FROM post_category WHERE post_id = ' . $post->getID());
+        $query = $this->pdo->prepare('INSERT INTO post_category SET post_id = ?, category_id = ?');
+        foreach ($categories as $category) {
+            $query->execute([$post->getID(), $category]);
+        }
+        $this->pdo->commit();
     }
 
     public function createPost (Post $post): void
@@ -30,15 +37,6 @@ final class PostTable extends Table
             'created_at' => $post->getCreatedAt()->format('Y-m-d H:i:s')
         ]);
         $post->setID($id);
-    }
-
-    public function attachCategories (int $id, array $categories)
-    {
-        $this->pdo->exec('DELETE FROM post_category WHERE post_id = ' . $id);
-        $query = $this->pdo->prepare('INSERT INTO post_category SET post_id = ?, category_id = ?');
-        foreach ($categories as $category) {
-            $query->execute([$id, $category]);
-        }
     }
 
     public function findPaginated () {

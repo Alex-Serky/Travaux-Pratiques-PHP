@@ -59,7 +59,7 @@ HTML;
             <div class="form-group">
                 <label for="field{$key}">{$label}</label>
                 <select id="field{$key}" class="{$this->getInputClass($key)}"
-                    name="{$key}[]" required multiple>{$optionsHTML}</select>
+                    name="{$key}" required multiple>{$optionsHTML}</select>
                 {$this->getErrorFeedback($key)}
             </div>
 HTML;

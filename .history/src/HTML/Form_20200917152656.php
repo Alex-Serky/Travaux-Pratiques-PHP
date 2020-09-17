@@ -47,11 +47,13 @@ HTML;
 
     public function select (string $key, string $label, array $options = []): string
     {
+        $options = [
+            1 => 'Catégories#1',
+            2 => 'Catégories#2'
+        ];
         $optionsHTML = [];
-        $value = $this->getValue($key);
         foreach ($options as $k => $v) {
-            $selected = in_array($k, $value) ? " selected" : "";
-            $optionsHTML[] = "<option value=\"$k\"$selected>$v</option>";
+            $optionsHTML[] = "<option value=\"$k\">$v</option>";
         }
         $value = $this->getValue($key);
         $optionsHTML = implode('', $optionsHTML);
@@ -59,7 +61,7 @@ HTML;
             <div class="form-group">
                 <label for="field{$key}">{$label}</label>
                 <select id="field{$key}" class="{$this->getInputClass($key)}"
-                    name="{$key}[]" required multiple>{$optionsHTML}</select>
+                    name="{$key}" required multiple>{$optionsHTML}</select>
                 {$this->getErrorFeedback($key)}
             </div>
 HTML;

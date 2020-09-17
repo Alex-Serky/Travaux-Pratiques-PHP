@@ -95,7 +95,7 @@ class Post
      *
      * @return Category[]
      */
-    public function setCategories(array $categories): self
+    public function setCategories(array $categories): array
     {
         $this->categories = $categories;
         return $this;

@@ -21,7 +21,7 @@ final class PostTable extends Table
         ], $post->getID());
     }
 
-    public function createPost (Post $post): void
+    public function createPost (Post$post): void
     {
         $id = $this->create([
             'name' => $post->getName(),
