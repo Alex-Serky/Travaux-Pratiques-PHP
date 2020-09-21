@@ -38,7 +38,7 @@ HTML;
                 <label for="field{$key}">{$label}</label>
                 <textarea type="text" id="field{$key}"
                     class="{$this->getInputClass($key)}"
-                    name="{$key}" required>
+                    name="{$key}">
                         {$value}
                 </textarea>
                 {$this->getErrorFeedback($key)}

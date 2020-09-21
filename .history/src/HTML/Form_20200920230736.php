@@ -91,7 +91,7 @@ HTML;
     private function getErrorFeedback (string $key): string
     {
         if (isset($this->errors[$key])) {
-            if (is_array($this->errors[$key])) {
+            if (is_array($this->errors['$key'])) {
                 $error = implode('<br>', $this->errors[$key]);
             } else {
                 $error = $this->errors[$key];

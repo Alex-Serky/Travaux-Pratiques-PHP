@@ -2,7 +2,7 @@
 
 namespace App;
 
-use App\Security\ForbiddenException;
+use App\Security\ForbidenException;
 
 class Auth
 {
@@ -12,7 +12,7 @@ class Auth
             session_start();
         }
         if (!isset($_SESSION['auth'])) {
-            throw new ForbiddenException();
+            throw new ForbidenException();
         }
     }
 }

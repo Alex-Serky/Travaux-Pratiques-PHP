@@ -24,7 +24,7 @@ class Form
                 <label for="field{$key}">{$label}</label>
                 <input type="{$type}" id="field{$key}"
                     class="{$this->getInputClass($key)}"
-                    name="{$key}" value="{$value}" required>
+                    name="{$key}" value="{$value}">
                 {$this->getErrorFeedback($key)}
             </div>
 HTML;
